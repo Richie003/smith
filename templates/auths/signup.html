@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.3/themes/base/jquery-ui.min.css" integrity="sha512-8PjjnSP8Bw/WNPxF6wkklW6qlQJdWJc/3w/ZQPvZ/1bjVDkrrSqLe9mfPYrMxtnzsXFPc434+u4FHLnLjXTSsg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>SignUp</title>
+<style>
+body{
+    margin-top:20px;
+    background: #f6f9fc;
+}
+.account-block {
+    padding: 0;
+    background-image: url(https://bootdey.com/img/Content/bg1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    position: relative;
+}
+.account-block .overlay {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.account-block .account-testimonial {
+    text-align: center;
+    color: #fff;
+    position: absolute;
+    margin: 0 auto;
+    padding: 0 1.75rem;
+    bottom: 3rem;
+    left: 0;
+    right: 0;
+}
+
+.text-theme {
+    color: #5369f8 !important;
+}
+
+.btn-theme {
+    background-color: #5369f8;
+    border-color: #5369f8;
+    color: #fff;
+}
+
+#alert-cont {
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    right: 0;
+    top: 5px;
+}
+</style>
+</head>
+<body class="d-none">
+    <div class="alert alert-dismissible fade mx-3" role="alert" id="alert-cont">
+        <p id="alert-message"></p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div id="main-wrapper" class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-10">
+                <div class="card border-0">
+                    <div class="card-body p-0">
+                        <div class="row no-gutters">
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="mb-5">
+                                        <h3 class="h4 font-weight-bold text-dark">Create an Account</h3>
+                                    </div>
+                                    <form method="POST" id="signupForm">
+                                        {%csrf_token%}
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">{{form.email.name}}</label>
+                                            {{form.email}}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">{{form.username.name}}</label>
+                                            {{form.username}}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">{{form.tel.name}}</label>
+                                            {{form.tel}}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Password</label>
+                                            {{form.password1}}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Confirm Password</label>
+                                            {{form.password2}}
+                                        </div>
+                                        <button type="submit" class="btn btn-dark">Sign up</button>
+                                        <a href="{% url 'signin' %}" class="forgot-link float-right text-primary">Sign in to account?</a>
+                                    </form>
+                                </div>
+                            </div>
+    
+                            <div class="col-lg-6 d-none d-lg-inline-block">
+                                <div class="account-block rounded-right">
+                                    <div class="overlay rounded-right"></div>
+                                    <div class="account-testimonial">
+                                        <h4 class="text-white mb-4" id="head-text"></h4>
+                                        <p class="lead text-white" id="min-text"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+                    <!-- end card-body -->
+                </div>
+                <!-- end card -->
+    
+                <p class="text-muted text-center mt-3 mb-0">Don't have an account? <a href="{%url 'signup'%}" class="text-primary ml-1">register</a></p>
+    
+                <!-- end row -->
+    
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- Row -->
+    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.3/jquery-ui.min.js" integrity="sha512-Ww1y9OuQ2kehgVWSD/3nhgfrb424O3802QYP/A5gPXoM4+rRjiKrjHdGxQKrMGQykmsJ/86oGdHszfcVgUr4hA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.10/jquery.lazy.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.10/jquery.lazy.plugins.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js'></script>
+<script>
+$(document).ready(() => {
+    $('body').removeClass("d-none")
+    $("input").addClass("form-control");
+
+    const imagePaths = ["/static/images/vacancies.jpg", "/static/images/reserve.jpg"];
+    const targetElement = $('.account-block');
+    const headText = $('#head-text');
+    const bottomText = $('#min-text');
+    let counter = 0;
+
+    setInterval(() => {
+        const currentImage = imagePaths[counter % 2];
+        targetElement.css({
+            "background-image": `url(${currentImage})`
+        });
+
+        if (counter % 2 === 1) {
+            headText.text("Have all the time");
+            bottomText.text(`"With family on that special table"`);
+        } else {
+            headText.text("Reserve a Table");
+            bottomText.text(`"Yes! without being there"`);
+        }
+
+        // Add lazy loading attribute with actual image URL
+        targetElement.attr('data-original', currentImage);
+        targetElement.addClass('lazy');
+
+        // Trigger lazy loading (optional)
+        targetElement.Lazy();
+
+        counter++;
+    }, 4000);
+
+    // Initialize Lazy after all images are set
+    $(document).imagesLoaded(() => {
+        $('.lazy').Lazy({
+            // Optional configuration options for lazy loading
+        });
+    });
+});
+// 
+$(document).on("submit", "#signupForm", (e)=>{
+    e.preventDefault();
+    const mainForm = $("#signupForm").serialize()
+    const mssg = $('#alert-message')
+    mssg.empty()
+    $.ajax({
+        type:"POST",
+        url:`{{request.path}}`,
+        data:mainForm,
+        success:(response)=>{
+            if(response.message){
+                $('#alert-cont').addClass('alert-info show')
+                mssg.text(response.message)
+                setTimeout(() => {
+                    $('#alert-cont').removeClass('alert-info show')
+                    window.location = '/auths/sign-in/'
+                }, 2000);
+            }
+        },
+        error:()=>{
+            $('#alert-cont').addClass('alert-danger show')
+            mssg.text("An error occurred")
+        }
+    })
+})
+</script>
+</body>
+</html>

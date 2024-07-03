@@ -1,0 +1,5 @@
+myenv/
+db.sqlite3
+migrations/
+GUIDELINES.MD
+ideation.MD
